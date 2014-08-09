@@ -1,0 +1,42 @@
+Gary Steelman
+6 Nov 07
+CS 53-D
+Test 2 Bonus 
+
+I:
+//pre : n is the size of the passed array v[], elements in v[] have been initialized, operator < must be defined for passed array type
+//post: findMin returns the smallest element of v[]
+template < typename T >
+T findMin(T v[], const int n)
+{
+  T min = 0;
+  for (int i=0; i < n; i++)
+  {
+    if(v[i] < min)
+    {
+      min = v[i];
+    }
+  }
+  return min;
+}
+
+II:
+[gws4g2@dell18 test2bonus]$ ./test2
+Min: 0
+Min: -1208974712
+Min: -1075580328
+
+In the first run, with the preconditions met, the findMin function worked as expected.
+In the second run, with the array not being initialized, the findMin function was left to work with junk values in the array from memory. As such, the smallest of those junk values was returned instead of an expected value.
+In the third run, with the array initialized but n NOT being the size of the array, but rather 10 larger than the size, the findMin failed. One would hope for a segmentation fault here, but instead the function just read in junk values from memory and used those values instead.
+
+III:
+[gws4g2@dell18 test2bonus]$ g++ -Wall -W -s -pedantic-errors ii.cpp -o test2
+ii.cpp: In function `int main()':
+ii.cpp:29: error: no matching function for call to `findMin(userType[100], const int&)'
+ii.cpp:5: warning: unused variable 'array1'
+ii.cpp:6: warning: unused variable 'array2'
+[gws4g2@dell18 test2bonus]$
+
+The error here is due to the fact that the less than operator (the operation calling for the structure) is not defined for this data type. Therefore the compiler does not know how to compare the two structures and cannot therefore find the minimum value.
+

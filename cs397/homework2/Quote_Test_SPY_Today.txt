@@ -1,0 +1,1 @@
+Error getting results back from the server. Check your symbol(s) and / or dates.

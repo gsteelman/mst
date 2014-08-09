@@ -1,0 +1,350 @@
+/*
+  @file main.nxc
+  @auth Gary Steelman
+  @desc The main driver for a robot built using the Lego Mindstorm NXT 2.0 kit.
+  @edit 01 May 2011
+*/
+
+/*
+  @fn     safecall void InitMotors()
+  @brief  Initializes the motors using the values in the preprocessor macros.
+  @pre    BOT_MAX_ACC and BOT_MAX_SPD have been defined.
+  @post   Initializes the motors using the values in the preprocessor macros.
+  
+  @fn     safecall void Step( float steps, char speed )
+  @brief  Drives the robot forward at speed the specified number of steps.
+  @pre    speed must be <= BOT_WALK_SPD.
+  @param  float steps -- The number of steps to walk the robot forward. This 
+            value may be non integral.
+  @param  char speed -- The speed (0,BOT_WALK_SPD] for the robot to walk forward.
+  @post   Drives the robot forward at speed the specified number of steps.
+  
+  @fn     safecall void RStep( float steps, char speed )
+  @brief  Drives the robot backward at the speed specified number of steps.
+  @pre    speed must be <= BOT_WALK_SPD.
+  @param  float steps -- The number of steps to walk the robot backward. This 
+            value may be non integral.
+  @param  char speed -- The speed (0,BOT_WALK_SPD] for the robot to walk backward.
+  @post   Drives the robot backward at speed the specified number of steps.
+  @note   FUNCTION NOT YET IMPLEMENTED.
+  
+  @fn     safecall void Rotate( float degrees, char speed )
+  @brief  Rotates the robot the specified number of degrees.
+  @pre    speed must be <= BOT_ROT_SPD.
+  @param  float degrees -- The number of degrees to rotate the robot. 
+            >0 : Rotate the robot to its left.
+            <0 : Rotate the robot to its right. 
+  @param  char speed -- The speed (0,BOT_ROT_SPD) for the robot to rotate.
+  @post   Rotates the robot the specified number of degrees.
+
+  @fn     safecall void Move( float F[], float& G[] )
+  @brief  Moves the robot from F's location to G's location.
+  @pre    F and G are 3D reference frames of 12 elements each and have only been
+            manipulated using the _3D library.
+  @param  float F[] -- The source reference frame whose location vector will be
+            used as the current location for the robot.
+  @param  float& G[] -- The destination reference frame whose location vector
+            will be used as the destination location for the robot.
+  @post   Moves the robot from F's location to G's location.
+  @note   EDITS THE REFERENCE FRAME G! The rotation matrix contained in G will
+            be altered to reflect the direction the robot moves in.
+  
+safecall void RMove ( float F[], float& G[] );
+*/
+
+#include "NXCDefs.h"            // Unnecessary, included for clarity
+#include "_3DFrame.h"           // The Frames used to track points of interest
+#include "numeric_constants.h"  // Useful numeric constants 
+
+#define SMALL_GEAR_TEETH  12    // The number of teeth on the motor axle
+#define LARGE_GEAR_TEETH  36    // The number of teeth on the output gear
+
+                                // The output torque ratio for the Gear System
+#define GEAR_RATIO        (LARGE_GEAR_TEETH / SMALL_GEAR_TEETH) 
+                                // The number of degrees a motor must rotate 
+                                // to create one full step forward
+#define DEG_PER_STEP      _DEG_PER_CIRCLE * GEAR_RATIO
+
+#define BOT_WIDTH         17    // The robot's width was measured as 17cm
+#define BOT_LEG_LEN       10    // The robot's leg was measured as 10cm
+                                // The circumference of the circle created when
+                                // a revolution is completed when rotating
+#define REV_CIRC_DIST     (2.0 * _PI * BOT_WIDTH)
+
+#define ACC_ROT_ERR       7.5   // The acceptable error in the final motor position
+#define ROT_ERR_SPD       10    // The speed the motors rotate to correct error
+
+                                // The minimum rotation allowed by the system,
+                                // Any attempted rotation using Move() that is 
+                                // less than this will not be executed
+#define MIN_ROT           0.5    
+
+#define MOT_LEFT          OUT_B // The left motor
+#define MOT_RIGHT         OUT_A // The right motor
+#define MOT_ALL           OUT_AB// The combination of left and right motors
+
+// Comment out the following line to indicated that the robot is going to walk
+// on a surface that has friction (carpet, concrete, etc)
+#define FRICTIONLESS      1
+
+#ifdef FRICTIONLESS
+                                // The added number of rotations necessary to
+                                // account for slippage on a frictionless surface
+  #define SLIP_FIX        1.5
+                                // Real-world centimeters covered per step
+  #define CM_PER_STEP     (((44.5 + 40.5 + 42.0 + 43.2 + 43.0 + 40.1) / 6.0) / 5.0)
+                                // Degrees a motor must turn to complete one revolution
+                                // during rotation
+  #define DEG_PER_ROT     DEG_PER_STEP * ((REV_CIRC_DIST / CM_PER_STEP) + SLIP_FIX)
+  #define BOT_MAX_SPD     70    // The maximum speed the motors can rotate (% of max)
+  #define BOT_MAX_ACC     15    // The maximum acceleration the motors can accelerate
+#else
+  #define CM_PER_STEP     (((31.0 + 35.2 + 33.7 + 33.9 + 36.3 + 32.0) / 6.0) / 5.0)
+  #define DEG_PER_ROT     DEG_PER_STEP * (REV_CIRC_DIST / CM_PER_STEP)
+  #define BOT_MAX_SPD     100
+  #define BOT_MAX_ACC     25
+#endif
+
+#define BOT_WALK_SPD BOT_MAX_SPD
+#define BOT_ROT_SPD  BOT_MAX_SPD
+
+safecall void InitMotors();
+
+safecall void Step  ( float steps, char speed );
+safecall void RStep ( float steps, char speed );
+
+safecall void Rotate( float degrees, char speed );
+
+safecall void Move  ( float F[], float& G[] );
+safecall void RMove ( float F[], float& G[] );
+
+// Reference frames for usage in main()
+float ORIGIN[12];
+float currLoc[12];
+float nextLoc[12];
+float tempLoc[12];
+
+/******************************************************************************/
+
+/*
+  @task main
+  @desc The main task for the robot. Over-arching control flow.
+  @pre  None.
+  @post The robot turns toward (-10,0,-10), walks there, turns toward (0,0,0)
+          and walks there.
+*/
+task main()
+{
+  _3D_Init( ORIGIN );
+  _3D_Init( currLoc );
+  _3D_Init( nextLoc );
+  _3D_Init( tempLoc );
+  
+  InitMotors();
+  
+  // Z is forward, X is left, Y is up
+  // Move to (-10,0,-10)
+  _3D_translate_rel( currLoc, -10.0, 0.0, -10.0, nextLoc );
+  Move( currLoc, nextLoc );
+  currLoc = nextLoc;
+  
+  // Move to (0,0,0)
+  nextLoc = ORIGIN;
+  Move( currLoc, nextLoc );
+  currLoc = nextLoc;
+  
+  // Wait indefinitely until the gray program end button is pressed on the brick
+  while ( true )
+  {
+    Wait( SEC_5 );
+  }
+}
+
+safecall void Step( float steps, char speed )
+{  
+  float angle_target;
+  float MOT_RIGHT_FIX;
+  float MOT_LEFT_FIX;
+  
+  // The number of degrees the motor needs to rotate to produce the real-world
+  // distance desired
+  angle_target = DEG_PER_STEP * steps;
+  
+  // Rotate then turn off the motors
+  RotateMotorEx( MOT_ALL, speed, angle_target, 0, TRUE, FALSE );
+  Off( MOT_ALL );
+  
+  /*
+    Calculate and apply small angle fixes to better align the motors after the
+    initial rotation stops. Iterates until both motors have been aligned to
+    within ACC_ROT_ERR degrees of the intended degrees of rotation
+  */
+  MOT_RIGHT_FIX = angle_target - MotorRotationCount( MOT_RIGHT );
+  MOT_LEFT_FIX  = angle_target - MotorRotationCount( MOT_LEFT );
+  
+  while ( abs( MOT_RIGHT_FIX ) > ACC_ROT_ERR || abs( MOT_LEFT_FIX ) > ACC_ROT_ERR )
+  {
+    RotateMotor( MOT_RIGHT, ROT_ERR_SPD, MOT_RIGHT_FIX );
+    Off( MOT_RIGHT );
+
+    RotateMotor( MOT_LEFT, ROT_ERR_SPD, MOT_LEFT_FIX );
+    Off( MOT_LEFT );
+    
+    // VM Clocks once per MS, need to do this to allow the values read to be
+    // the correctly output values from the previous tick
+    Wait( MS_1 );
+    
+    MOT_RIGHT_FIX = angle_target - MotorRotationCount( MOT_RIGHT );
+    MOT_LEFT_FIX  = angle_target - MotorRotationCount( MOT_LEFT );
+  }
+  
+  // Rotation count resets can take up to 1 MS to apply, allot time for it
+  ResetRotationCount( MOT_ALL );
+  Wait( MS_1 );
+}
+
+safecall void RStep( float steps, char speed )
+{
+}
+
+safecall void Rotate( float degrees, char speed )
+{  
+  float angle_target;
+  float MOT_RIGHT_FIX;
+  float MOT_LEFT_FIX;
+ 
+  // The number of degrees the motor needs to rotate to produce the real-world
+  // rotation desired
+  angle_target = DEG_PER_ROT * degrees / _DEG_PER_CIRCLE;
+
+  // If the rotation desired is less than the minimum rotation allowed, do nothing
+  if ( abs(angle_target) < MIN_ROT )
+  {
+    return;
+  }
+  
+  // Rotate right by holding right legs at stop and driving left legs forward
+  else if ( angle_target < 0.0 )
+  {
+    // angle_target was <0, symbolizing a right-rotation, but the value must
+    // be positive to make the left motor move forward
+    angle_target = -angle_target;
+    
+    RotateMotor( MOT_LEFT, speed, angle_target );
+    Off( MOT_LEFT );
+    
+    /*
+    Calculate and apply small angle fixes to better align the motors after the
+    initial rotation stops. Iterates until both motors have been aligned to
+    within ACC_ROT_ERR degrees of the intended degrees of rotation
+    */
+    MOT_LEFT_FIX = angle_target - MotorRotationCount( MOT_LEFT );
+    
+    while ( abs( MOT_LEFT_FIX ) > ACC_ROT_ERR )
+    {
+      RotateMotor( MOT_LEFT, ROT_ERR_SPD, MOT_LEFT_FIX );
+      Off( MOT_LEFT );
+
+      Wait( MS_1 );
+
+      MOT_LEFT_FIX = angle_target - MotorRotationCount( MOT_LEFT );
+    }
+  }
+  
+  // Rotate left by holding left legs at stop and driving right legs forward
+  else
+  {
+    RotateMotor( MOT_RIGHT, speed, angle_target );
+    Off( MOT_RIGHT );
+
+    /*
+    Calculate and apply small angle fixes to better align the motors after the
+    initial rotation stops. Iterates until both motors have been aligned to
+    within ACC_ROT_ERR degrees of the intended degrees of rotation
+    */
+    MOT_RIGHT_FIX  = angle_target - MotorRotationCount( MOT_RIGHT );
+
+    while ( abs( MOT_RIGHT_FIX ) > ACC_ROT_ERR )
+    {
+      RotateMotor( MOT_RIGHT, ROT_ERR_SPD, MOT_RIGHT_FIX );
+      Off( MOT_RIGHT );
+
+      Wait( MS_1 );
+
+      MOT_RIGHT_FIX  = angle_target - MotorRotationCount( MOT_RIGHT );
+    }
+  }
+
+  // Could not reset motor rotation counts for use in path correction later
+  ResetRotationCount( MOT_ALL );
+  Wait( MS_1 );
+}
+
+void InitMotors()
+{
+  // Set the interval the motors are timed at
+  SetMotorRegulationTime( MS_1 );
+  
+  // Don't limit intermediary results
+  SetMotorRegulationOptions( OUT_REGOPTION_NO_SATURATION );
+  
+  // Set the maximum speed allowed and the maximum acceleration allowed for motors
+  PosRegSetMax( MOT_ALL, BOT_MAX_SPD, BOT_MAX_ACC );
+}
+
+void Move( float F[], float& G[] )
+{
+  float F2  = F[2];
+  float F3  = F[3];
+  float F10 = F[10];
+  float F11 = F[11];
+  float G3  = G[3];
+  float G11 = G[11];
+  float currAngle;
+  float destAngle;
+  float angleDiff;
+  float distance;
+  float rotation;
+
+  // Calculate the current heading off of the world Z+ axis
+  currAngle = atan2( F2, F10 );
+
+  // Calculate the destination heading off of the world Z+ axis
+  destAngle = atan2( G3-F3, G11-F11 );
+
+  // Convert both destination and current headings to "positive" angles if necessary
+  if ( destAngle < 0 )
+    destAngle = _RAD_PER_CIRCLE + destAngle;
+  if ( currAngle < 0 )
+    currAngle = _RAD_PER_CIRCLE + currAngle;
+  
+  // The number of degrees necessary to rotate from the current heading to the 
+  // destination heading
+  angleDiff = destAngle - currAngle;
+
+  // Determine the smallest rotation necesary to achieve desired rotation
+  if ( currAngle < destAngle )
+    if ( currAngle + (_RAD_PER_CIRCLE / 2) < destAngle )
+      angleDiff = -(_RAD_PER_CIRCLE - angleDiff);
+  else if ( destAngle < currAngle )
+    if ( destAngle + (_RAD_PER_CIRCLE / 2) < currAngle )
+      angleDiff = -(_RAD_PER_CIRCLE - angleDiff);
+
+  _3D_distance( F, G, distance );
+  
+  // Turn robot toward destination
+  Rotate( angleDiff * _DEG_PER_RAD, BOT_ROT_SPD );
+  
+  // Walk robot toward destination
+  Step( (distance / CM_PER_STEP), BOT_WALK_SPD );
+  
+  // Update the robot's current frame to reflect the rotation toward the destination
+  float GCopy[12];
+  GCopy = G;
+  _3D_rot_y( GCopy, angleDiff, G );
+}
+
+void RMove( float F[], float G[] )
+{
+}
+

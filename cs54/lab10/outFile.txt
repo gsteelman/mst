@@ -1,0 +1,4 @@
+Added values: 
+9 7 5 
+Subtracted values: 
+3 3 3 

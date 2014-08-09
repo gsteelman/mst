@@ -1,0 +1,285 @@
+@prefix game: <http://www.gamewarp.org/game#> .
+@prefix gen: <http://www.gamewarp.org/genre#> .
+@prefix tgen: <http://www.gamewarp.org/tgenre#> .
+@prefix tags: <http://www.gamewarp.org/tags#> .
+@prefix plat: <http://www.gamewarp.org/platform#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+game:metroidPrime
+ a gen:fps, gen:platformer ;
+ rdfs:label "Metroid Prime" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:GCN, plat:Wii ;
+ tags:tags tags:rendered3D, tags:played3D, tags:aliens, tags:collection, tags:lasers, tags:laserGuns, tags:pirates, tags:samus .
+
+game:starcraft
+ a gen:rts ;
+ rdfs:label "Starcraft" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:rendered2D, tags:played2D, tags:aliens, tags:lasers, tags:robots, tags:online, tags:multiplayer, tags:werewolves .
+
+game:massEffect
+ a gen:action, gen:tps, gen:wrpg ;
+ rdfs:label "Mass Effect" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Xbox360, plat:Playstation3, plat:PC ;
+ tags:tags tags:rendered3D, tags:played3D, tags:aliens, tags:guns, tags:robots, tags:alignment, tags:laserGuns .
+
+game:callOfDuty4ModernWarfare
+ a gen:fps ;
+ rdfs:label "Call of Duty 4: Modern Warfare" ;
+ tags:tgenre tgen:action ;
+ tags:availableOn plat:Xbox360, plat:PlayStation3, plat:PC ;
+ tags:tags tags:rendered3D, tags:played3D, tags:multiplayer, tags:online, tags:guns .
+
+game:dragonAgeOrigins
+ a gen:wrpg ;
+ rdfs:label "Dragon Age: Origins" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:Windows, plat:OSX ;
+ tags:tags tags:rendered3D, tags:played3D, tags:swords, tags:elves, tags:trolls, tags:warlocks, tags:dragons, tags:alignment .
+
+game:kingdomHearts
+ a gen:jrpg ;
+ rdfs:label "Kingdom hearts" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:Playstation2 ;
+ tags:tags tags:rendered3D, tags:played3D, tags:collection .
+
+game:finalfantasyX
+ a gen:jrpg ;
+ rdfs:label "Final fantasy X" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:NintendoDS ;
+ tags:tags tags:rendered3D, tags:played3D, tags:swords, tags:collection .
+
+game:advanceWars
+ a gen:turnBasedStrategy ;
+ rdfs:label "Advance Wars" ;
+ tags:tgenre tgen:action ;
+ tags:availableOn plat:GBA ;
+ tags:tags tags:rendered2D, tags:played2D, tags:multiplayer .
+
+game:fireEmblemPathOfRadiance
+ a gen:turnBasedStrategy, gen:rpg ;
+ rdfs:label "Fire Emblem: Path of Radiance" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:GCN ;
+ tags:tags tags:rendered3D, tags:played2D, tags:collection, tags:swords .
+ 
+game:assassinsCreed2
+ a gen:action, gen:adventure ;
+ rdfs:label "Assassin's Creed 2" ;
+ tags:tgenre tgen:action ;
+ tags:availableOn plat:Xbox360, plat:Playstation3, plat:PC ;
+ tags:tags tags:rendered3D, tags:played3D, tags:collection, tags:swords .
+
+game:superMetroid
+ a gen:action, gen:adventure ;
+ rdfs:label "Super Metroid" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:SuperNintendoEntertainmentSystem, plat:Wii ;
+ tags:tags tags:rendered2D, tags:played2D, tags:robots, tags:collection, tags:lasers, tags:laserGuns, tags:timeSensitive, tags:samus .
+
+game:castlevaniaSymphonyOfTheNight
+ a gen:action, gen:adventure, gen:platformer ;
+ rdfs:label "Castlevania: Symphony of the Night" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:PlayStation , plat:Xbox360, plat:PlayStation3 ;
+ tags:tags tags:rendered2D, tags:played2D, tags:mummies, tags:zombies, tags:collection, tags:ghosts, tags:vampires, tags:werewolves, tags:swords .
+
+game:shadowComplex
+ a gen:action, gen:adventure, gen:platformer ;
+ rdfs:label "Shadow Complex" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Xbox360 ;
+ tags:tags tags:rendered3D, tags:played2D, tags:robots, tags:guns, tags:terrorists, tags:collection, tags:laserGuns, tags:timeSensitive .
+
+game:themeHospital
+ a gen:simulation ;
+ rdfs:label "Theme Hospital" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:PlayStation, plat:PlayStation3 ;
+ tags:tags tags:rendered2D, tags:played2D, tags:multiplayer, tags:timeSensitive .
+
+game:minecraft
+ a gen:action, gen:adventure ;
+ rdfs:label "Minecraft" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:Windows, plat:OSX ;
+ tags:tags tags:rendered3D, tags:played3D, tags:zombies, tags:ghosts, tags:swords, tags:survival, tags:timeSensitive, tags:cooking, tags:scary, tags:sandbox, tags:crafting.
+
+game:retroGameChallenge
+ a gen:action, gen:adventure, gen:rpg, gen:driving, gen:shooter, gen:platformer ;
+ rdfs:label "Retro Game Challenge" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:NintendoDS ;
+ tags:tags tags:rendered2D, tags:played2D, tags:warlocks .
+
+game:traumaCenterUnderTheKnife
+ a gen:simulation ;
+ rdfs:label "Trauma Center: Under the Knife" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:NintendoDS ;
+ tags:tags tags:rendered3D, tags:played3D, tags:madScientists, tags:timeSensitive .
+
+game:phoenixWrightAceAttorney
+ a gen:adventure ;
+ rdfs:label "Phoenix Wright: Ace Attorney" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:NintendoDS, plat:Wii ;
+ tags:tags tags:rendered2D, tags:played2D, tags:terrorists, tags:collection, tags:guns .
+
+game:theLegendOfZelda
+ a gen:action, gen:adventure ;
+ rdfs:label "The Legend of Zelda" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:NintendoEntertainmentSystem, plat:Wii, plat:GameBoyAdvance ;
+ tags:tags tags:rendered2D, tags:played2D, tags:ghosts, tags:elves, tags:warlocks, tags:swords, tags:collection, tags:link .
+
+game:gradiusIII
+ a gen:shmup ;
+ rdfs:label "Gradius III" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:PlayStation2 , plat:SuperNintendoEntertainmentSystem, plat:Wii, plat:Arcade ;
+ tags:tags tags:rendered2D, tags:played2D, tags:robots, tags:lasers, tags:vicViper.
+
+game:goldenSunTheLostAge
+ a gen:jrpg ;
+ rdfs:label "Golden Sun: The Lost Age" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:GameBoyAdvance ;
+ tags:tags tags:rendered2D, tags:played2D, tags:crafting, tags:multiplayer, tags:zombies, tags:dragons, tags:ghosots, tags:vampires, tags:werewolves, tags:ninjas, tags:samurai, tags:pirates, tags:trolls, tags:elves, tags:warlocks, tags:grinding, tags:swords, tags:collection.
+
+game:bitTripBeat
+ a gen:rhythm, gen:action ;
+ rdfs:label "BIT.TRIP BEAT" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Wii, plat:iOS, plat:PC ;
+ tags:tags tags:rendered3D, tags:played2D, tags:multiplayer, tags:cooperative, tags:lasers, tags:commanderVideo .
+
+game:bitTriPCore
+ a gen:rhythm ;
+ rdfs:label "BIT.TRIP CORE" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Wii ;
+ tags:tags tags:rendered2D, tags:played2D, tags:multiplayer, tags:cooperative, tags:lasers, tags:commanderVideo .
+
+game:bitTripVoid
+ a gen:rhythm, gen:shmup ;
+ rdfs:label "BIT.TRIP VOID" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Wii ;
+ tags:tags tags:rendered2D, tags:played2D, tags:multiplayer, tags:cooperative, tags:commanderVideo .
+
+game:bitTripRunner
+ a gen:rhythm, gen:platformer ;
+ rdfs:label "BIT.TRIP RUNNER" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Wii ;
+ tags:tags tags:rendered3D, tags:played2D, tags:lasers, tags:collection, tags:robots, tags:commanderVideo .
+
+game:bitTripRunner
+ a gen:rhythm, gen:shmup, gen:railShooter ;
+ rdfs:label "BIT.TRIP FATE" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Wii ;
+ tags:tags tags:rendered3D, tags:played2D, tags:lasers, tags:collection, tags:robots, tags:lasers, tags:commanderVideo .
+ 
+game:sonicAdventure2Battle
+ a gen:action, gen:tps, gen:platformer, gen:driving ;
+ rdfs:label "Sonic Adventure 2: Battle" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:NintendoGameCube ;
+ tags:tags tags:rendered3D, tags:played3D, tags:robots, tags:multiplayer, tags:madScientists, tags:aliens, tags:timeSensitive, tags:lasers, tags:miniGames, tags:collection, tags:pets, tags:sonic .
+
+game:picross3D
+ a gen:puzzle ;
+ rdfs:label "Picross 3D" ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:NintendoGameCube ;
+ tags:tags tags:rendered3D, tags:played3D, tags:timeSensitive, tags:collection, tags:userGeneratedContent .
+ 
+game:starFox64
+ a gen:railShooter ;
+ rdfs:label "Star Fox 64" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:Nintendo64, plat:Wii ;
+ tags:tags tags:rendered3D, tags:played3D, tags:multiplayer, tags:terrorists, tags:robots, tags:aliens, tags:lasers, tags:space, tags:foxMcCloud .
+ 
+game:paperMario
+ a gen:platformer, gen:rpg ;
+ rdfs:label "Paper Mario" ;
+ tags:tgenre tgen:adventure, tgen:fantasy, tgen:mystery ;
+ tags:availableOn plat:Nintendo64, plat:Wii ;
+ tags:tags tags:rendered2D, tags:played3D, tags:grinding, tags:cooking, tags:collection, tags:miniGames, tags:Mario, tags:Luigi .
+ 
+game:superMariorpgLegendOfTheSevenStars
+ a gen:rpg ;
+ rdfs:label "Super Mario rpg: Legend of the Seven Stars" ;
+ tags:tgenre tgen:adventure, tgen:fantasy ;
+ tags:availableOn plat:SuperNintendoEntertainmentSystem, plat:Wii ;
+ tags:tags tags:rendered2D, tags:played2D, tags:grinding, tags:collection, tags:miniGames, tags:Mario .
+ 
+game:superMarioBros
+ a gen:platformer ;
+ rdfs:label "Super Mario Bros." ;
+ tags:tgenre tgen:notApplicable ;
+ tags:availableOn plat:NintendoEntertainmentSystem, plat:Wii, plat:GameBoy.
+
+game:granTurismo4
+ a gen:driving, gen:simulation ;
+ rdfs:label "Gran Turismo 4" ;
+ tags:tgenre tgen:action ;
+ tags:availableOn plat:PlayStation3 ;
+ tags:tags tags:timeSensitive, tags:grinding .
+
+game:guildWars
+ a gen:adventure, gen:rpg, gen:rts ;
+ rdfs:label "Guild Wars" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:mmo, tags:swords, tags:dragons, tags:ghosts, tags:zombies, tags:cooperative, tags:online, tags:multiplayer, tags:crafting .
+
+game:leagueOfLegends
+ a gen:action, gen:rpg, gen:rts ;
+ rdfs:label "League of Legends" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:mmo, tags:swords, tags:dragons, tags:cooperative, tags:online, tags:multiplayer, tags:crafting .
+
+game:ffxi
+ a gen:action, gen:rpg ;
+ rdfs:label "ffxi" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:PlayStation2, plat:xbox360, plat:PC ;
+ tags:tags tags:mmo, tags:swords, tags:dragons, tags:zombies, tags:cooperative, tags:online, tags:multiplayer, tags:crafting, tags:ghosts .
+
+game:dukeNukem3D
+ a gen:action, gen:fps ;
+ rdfs:label "Duke Nukem 3D" ;
+ tags:tgenre tgen:postApocalyptic ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:aliens, tags:guns, tags:laserguns .
+
+game:redFaction
+ a gen:action, gen:fps ;
+ rdfs:label "Red Faction" ;
+ tags:tgenre tgen:sciFi ;
+ tags:availableOn plat:PC, plat:PS2 ;
+ tags:tags tags:aliens, tags:guns, tags:laserguns .
+
+game:teamFortress2
+ a gen:fps ;
+ rdfs:label "Team Fortress 2" ;
+ tags:tgenre tgen:action ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:guns, tags:online, tags:multiplayer, tags:casual, tags:crafting .
+
+game:diablo2
+ a gen:action, gen:rpg ;
+ rdfs:label "Diablo 2" ;
+ tags:tgenre tgen:fantasy ;
+ tags:availableOn plat:PC ;
+ tags:tags tags:swords, tags:ghosts, tags:zombies, tags:cooperative, tags:online, tags:multiplayer, tags:grinding, tags:crafting .

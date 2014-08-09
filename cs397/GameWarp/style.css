@@ -1,0 +1,28 @@
+﻿
+a:link {color: #658cf5;}
+a:hover {color: white;}
+a:visited {color: #658cf5;}
+#nav, #nav ul { /* all lists */	padding: 0;	margin: 0;	list-style: none;	line-height: 1;}
+#nav a {display: block;}
+#nav li { /* all list items */	float: left;	width: 10em; /* width needed or else Opera goes nuts */}
+#nav li ul { /* second-level lists */	position: absolute;	background: black;	width: 200px;	left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */}
+#nav li:hover ul, #nav li.sfhover ul { /* lists nested under hovered list items */	left: auto;}
+#nav li.item1{margin:0px;padding:0px;float:left;width: 143px;}
+#nav li.item2{margin:0px;padding:0px;float:left;width: 134px;}
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+sfHover = function() {
+	var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+//--><!]]></script>

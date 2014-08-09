@@ -1,0 +1,61 @@
+﻿<link rel="SHORTCUT ICON" href="icon.jpg">
+<style type="text/css">
+body
+{	
+    margin-left: 0px;
+	margin-top: -23px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-attachment: fixed;
+}
+
+table {
+    font-size:14px;
+}
+a:link {color: #658cf5;}
+a:visited {color: #658cf5;}
+a:hover {color: white;}
+a.sfhover {color: white;}
+#nav, #nav ul { /* all lists */	padding: 0;	margin: 0;	list-style: none;	line-height: 1.25;}
+#nav a {display: block;}
+#nav li { /* all list items */	float: left;	width: 10em; /* width needed or else Opera goes nuts */}
+#nav li ul { /* second-level lists */	position: absolute;	background: black;	width: 200px;	left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */}
+#nav li:hover ul, #nav li.sfhover ul { /* lists nested under hovered list items */	left: auto; padding:2px;}
+#nav li.item1{margin:0px;padding:0px;float:left;width: 143px;}
+#nav li.item2{margin:0px;padding:0px;float:left;width: 134px;}
+.style1 {font-size: 24px;font-weight:bold;color:black;font-style: italic;}
+.style2 {font-size: 14px;font-weight:bold;}
+.style3 {font-size: 16px;font-weight:bold;}
+.subheader {font-size: 18px;font-weight:bold;font-style:italic;}
+.sysnotes {font-size: 16px;font-weight:bold;}
+.flashresult {font-size: 22px;font-weight:bold;color:#658cf5;font-style:italic;}
+</style>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+sfHover = function() {
+	var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+//--><!]]></script>
+<script type="text/javascript">
+var loggedin = "<?php echo isset($_SESSION["AcctNumber"]); ?>";
+
+function capture(e)
+{
+var evt = e || window.event; 
+if(evt.keyCode==13 && !loggedin)
+{
+    document.login.submit();
+}
+}
+document.onkeyup=capture
+</script>

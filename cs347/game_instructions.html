@@ -1,0 +1,59 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>CS347 SP2010 Game Project Page</title></head><body>
+<h3>CS347 SP2010 Game Project Page - Backgammon</h3>
+
+<i>Revision 2/23/2010. Note: it is the <i>students'</i> responsibility to check the CS347 website for possible new revisions!</i>
+
+<p>The game this semester is Backgammon.  To complete the game project assignments, you need to fill in the <i>run()</i> function of the <i>AI</i> class in the provided AI framework template to implement an AI player for Backgammon. Upon each call of the <i>run()</i>
+function, your AI player needs to return the best legal move it can
+find using the search algorithm specified in the below phase grid. The
+latest version of the framework can be checked out from Google Code
+using the following command:
+<br><br><i>svn checkout http://cs347backgammon.googlecode.com/svn/trunk/ cs347backgammon-read-only</i><br><br>
+Further instructions and documentation regarding the framework will be found in the root directory of this svn repository.
+
+</p><p>You should only submit a <b>single zip or tar.gz file</b> (not bzip or any other compression format!) containing all of the files required to compile/execute your program, on or before
+the due date specified in the below phase grid. This is accomplished by
+following the instructions at <a href="http://web.mst.edu/%7Etauritzd/submission.html">http://web.mst.edu/~tauritzd/submission.html</a>.</p>
+
+<p>Note: this is an individual project; plagiarism of any type will result in a zero grade.</p>
+
+<p>While it is hoped that all code will be submitted error-free and on
+time, this may not always be the case, so the following rules apply in
+that case:
+</p><li>You <i>must</i> make your final submission within five days of the due date. Submissions which are more than five days late will <b>not</b> be graded.</li>
+<li>If your code is submitted late, a 5% per day penalty will
+apply (fractions of days are rounded up), after five days you will
+automatically receive a zero.</li>
+<li>Resubmissions are allowed but late penalties will apply based on the last submission.</li>
+<li>The lowest of your Phase IV and Phase IV Makeup grades will be dropped.</li>
+
+<p><table border="1"><caption><b>Phase Task Grid</b></caption>
+<tbody><tr><th>Phase</th><th>Search Algorithm</th><th>Due Date    </th></tr>
+<tr><td>I        </td><td>Generate the set of all legal moves and then uniform randomly return one of those moves.
+						  While not strictly necessary to perform a random search, a board state generator is a required component of this phase</td><td>Tuesday 3/9</td></tr>
+<tr><td>II       </td><td>Generate a legal move employing Time-Limited Iterative-Deepening Depth-Limited ExpectiMinimax</td><td>Tuesday 3/23</td></tr>
+<tr><td>III      </td><td>Generate a legal move employing Time-Limited Iterative-Deepening Depth-Limited Star1 with good quality time-per-move heuristic</td><td>Tuesday 4/13</td></tr>
+<tr><td>IV       </td><td>Generate a legal move employing Time-Limited
+Iterative-Deepening Depth-Limited Star1 with History Table &amp;
+Quiescence Search; bonus points for upgrading to Star2</td><td>
+Tuesday 4/20</td></tr>
+<tr><td>IV Makeup</td><td>Generate a legal move employing Time-Limited
+Iterative-Deepening Depth-Limited Star1 with History Table &amp;
+Quiescence Search; bonus points for upgrading to Star2</td><td>
+Tuesday 4/27</td></tr>
+</tbody></table></p>
+
+<p><table border="1"><caption><b>Phase Grade Distribution Grid</b></caption>
+<tbody><tr><th>Code element                                                                    </th><th>Phase I</th><th>Phase II</th><th>Phase III</th><th>Phase IV &amp; IV Makeup</th>
+</tr><tr><td>Legal move and state generation                                                 </td><td>70%    </td><td>10%     </td><td>5%       </td><td>5%      </td>
+</tr><tr><td>Specified search algorithm                                                      </td><td>10%    </td><td>50%     </td><td>55%      </td><td>60%     </td>
+</tr><tr><td>State evaluation heuristic														</td><td>0%     </td><td>10%     </td><td>10%      </td><td>10%     </td>
+</tr><tr><td>Time per move heuristic                                                         </td><td>0%     </td><td>10%     </td><td>10%       </td><td>5%      </td>
+</tr><tr><td>Good programming practices (adherence to coding standards, modular design, etc.)</td><td>10%    </td><td>10%     </td><td>10%      </td><td>10%     </td>
+</tr><tr><td>Code reliability (no crashes, defensive programming, compiles correctly)        </td><td>10%    </td><td>10%     </td><td>10%      </td><td>10%     </td>
+</tr><tr><td>Bonus points																	</td><td>0%     </td><td>0%     </td><td>0%       </td><td>20%      </td>
+</tr></tbody></table></p>
+
+</body></html>

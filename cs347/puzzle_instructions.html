@@ -1,0 +1,69 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"><title>CS347 SP2010 Puzzle Project Page</title></head><body>
+
+<h3>CS347 SP2010 Puzzle Project Page - Traveling Salesman Problem (TSP)</h3>
+
+<i>Revision 1/12/2010. Note: it is the <b>students'</b> responsibility to check the CS347 website for possible new revisions!</i>
+
+<p>The puzzle this semester is the classic symmetric Euclidean Travelling Salesman Problem (TSP) [see <a href="http://en.wikipedia.org/wiki/Travelling_salesman_problem">http://en.wikipedia.org/wiki/Travelling_salesman_problem</a>], a member of the family of touring puzzles. Let <i>n</i> be a positive integer. Given a set of <i>n</i>
+cities and distances between each pair of cities with the distance
+between each pair of cities being the same in either direction (hence
+symmetric) and the distance between two cities corresponding to the
+distance being their corresponding geographic locations (hence
+Euclidean), find a Hamiltonian circuit with minimal total travel
+distance. The solution format for this puzzle is a permutation of the
+cities where an edge is implied between the first and last listed
+cities. Legal moves are those that visit a new city or, if all cities
+have been visited, return to the start city.
+</p>
+
+<p>Your program should read in the file specified by the user on the
+command line, then generate a solution employing the algorithm
+specified in below phase task grid and display the resulting final
+solution (i.e., a solved state) following on the next line by the total
+travel distance. The data files that you should test on and that the
+grader will be using are: <a href="http://web.mst.edu/%7Etauritzd/courses/cs347/sp2010/problem1.tsp">Problem 1</a>, <a href="http://web.mst.edu/%7Etauritzd/courses/cs347/sp2010/problem2.tsp">Problem 2</a>, and <a href="http://web.mst.edu/%7Etauritzd/courses/cs347/sp2010/problem3.tsp">Problem 3</a>.</p>
+
+<p>You should only submit a <b>single zip file</b> containing your
+source code along with any additional dependencies your program has in
+order to build your program, including but not limited to makefile,
+Microsoft Visual Studio Project file, or alternative compile script, on
+or before the due date specified in the below phase task grid. Your
+program has to be able to compile on campus standard builds; testing on
+these machines is therefore highly recommended! Also note that no
+manual configuration by the grader should be necessary to compile and
+execute your program; this should be handled by your makefile, MS
+Visual Studio Project file, or alternative compile script. Submitting
+is accomplished by following the instructions at <a href="http://web.mst.edu/%7Etauritzd/submission.html">http://web.mst.edu/~tauritzd/bbassignmenttool.html</a>.</p>
+
+<p>Note: this is an individual project; plagiarism of any type will result in a zero grade.</p>
+
+<p>While it is hoped that all code will be submitted error-free and on
+time, this may not always be the case, so the following rules apply in
+that case:
+</p><li>You <i>must</i> make your final submission within four days of the due date. Submissions which are more than four days late will <b>not</b> be graded.</li>
+<li>If your code is submitted late, a five percent per day penalty will
+apply (fractions of days are rounded up), after four days you will
+automatically receive a zero.</li>
+<li>Resubmissions are allowed only until the submission deadline.</li><p></p>
+
+<p><table border="1"><caption><b>Phase Task Grid</b></caption>
+<tbody><tr><th>Phase</th><th>Search Algorithm</th><th>Due Date    </th></tr>
+<tr><td>I        </td><td>Uniform random search. While not strictly
+necessary to perform a random search, a board state generator is a
+required component of this phase.</td><td>Tuesday 1/26</td></tr>
+<tr><td>II       </td><td>Uniform-Cost Tree Search</td><td>Tuesday 2/2</td></tr>
+<tr><td>III      </td><td>Bi-Directional Uniform-Cost Graph Search</td><td>Tuesday 2/16</td></tr>
+<tr><td>IV       </td><td>Bi-Directional A* Graph Search. <!--Bonus: Include a separate implementation of IDA* Graph Search.--></td><td>Tuesday 2/23</td></tr>
+</tbody></table></p>
+
+<p><table border="1"><caption><b>Phase Grade Distribution Grid</b></caption>
+<tbody><tr><th>Code element                                                                    </th><th>Phase I</th><th>Phase II</th><th>Phase III</th><th>Phase IV</th>
+</tr><tr><td>Legal move and state generation                                                 </td><td>70%    </td><td>10%     </td><td>5%       </td><td>5%      </td>
+</tr><tr><td>Specified search algorithm                                                      </td><td>10%    </td><td>70%     </td><td>75%      </td><td>75%     </td>
+</tr><tr><td>Good programming practices (adherence to coding standards, modular design, etc.)</td><td>10%    </td><td>10%     </td><td>10%      </td><td>10%     </td>
+</tr><tr><td>Code reliability (no crashes, defensive programming, compiles correctly)        </td><td>10%    </td><td>10%     </td><td>10%      </td><td>10%     </td>
+</tr><tr><td>Bonus   																		</td><td>       </td><td>10%     </td><td>         </td><td>10%     </td>
+</tr></tbody></table></p>
+
+</body></html>

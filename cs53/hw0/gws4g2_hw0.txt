@@ -1,0 +1,4 @@
+Gary Steelman's directory. Here's hoping this works :
+
+testing to see if I can clear an entire vim file in fell swoop, apparently
+cant so Ill be rming a lot T)T

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+<head>
+<title>Dropdown 2</title>
+
+<style type="text/css">
+body {font-family: arial, helvetica, serif;}
+#nav, #nav ul { /* all lists */	padding: 0;	margin: 0;	list-style: none;	line-height: 1;}
+#nav a {display: block;}
+#nav li { /* all list items */	float: left;	width: 10em; /* width needed or else Opera goes nuts */}
+#nav li ul { /* second-level lists */	position: absolute;	background: #CCC;	width: 130px;	left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */}
+#nav li:hover ul, #nav li.sfhover ul { /* lists nested under hovered list items */	left: auto;}
+#nav li.item1{margin:0px;padding:0px;float:left;width: 143px;}
+#nav li.item2{margin:0px;padding:0px;float:left;width: 134px;}
+</style>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+sfHover = function() {
+	var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+//--><!]]></script>
+</head>
+<body>
+<ul id="nav">
+	<li class="item1"><a href="#"><img src="mainmenu3.jpg" border="0"/></a>
+		<ul>
+			<li><a href="#">Action 1</a></li>
+			<li><a href="#">Action 2</a></li>
+			<li><a href="#">Action 3</a></li>
+		</ul>
+	</li>
+	<li class="item2"><a href="#"><img src="mainmenu4.jpg" border="0"/></a>
+		<ul>
+			<li><a href="#">Action 1</a></li>
+			<li><a href="#">Action 2</a></li>
+			<li><a href="#">Action 3</a></li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,7 @@
+To compile this just give the command 
+> make
+or 
+> make driver
+
+To run with the supplied files, then, just
+> ./driver <filename>

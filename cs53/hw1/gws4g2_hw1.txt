@@ -1,0 +1,72 @@
+Gary Steelman
+gws4g2@umr.edu
+hw1.txt
+CS53-D
+This is homework 1, the algorithm homework :D
+
+--Problem 1: The Flat Tire--
+1: Check to make sure that you have a lug-wrench, a jack, and an inflated spare tire, if not, go to 1a
+ 1a: Call for help
+2: Remove lug-wrench, jack, and inflated spare tire from inside of vehicle and place onto the ground next to the deflated tire, if unable to process this step, go to 2a
+ 2a: Call for help
+3: Place and align the jack perpendicular to the car next to the deflated wheel, remove hand from the jack
+4: Use handle on jack to pump the jack up and raise the car so the tire is approximately 2 inches off of the ground
+5: Pick up the lug-wrench and utilize it to remove the lug nuts on the tire
+6: Put down the lug-wrench and remove the deflated tire from the vehicle
+7: Place the deflated tire on the ground away from the vehicle a few feet
+8: Pick up the replacement tire and put it onto the car in the appropriate place where the deflated tire was
+9: Pick up the lug-wrench and replace the lug nuts onto the car
+10: Put the lug-wrench down and lower the jack until all 4 wheels of the vehicle rest safely on the ground again
+11: Place the deflated tire into the trunk of the vehicle
+12: Place the lug-wrench into the trunk of the vehicle
+13: Place the jack into the trunk of the vehicle
+14: Drive to the nearest town and seek further assistance
+
+--Problem 2: Integer Divison with no Division--
+1: Choose two integers
+2: Determine the larger of the two integers after taking the absolute value of each, it shall be called A and the smaller of the two shall be called B
+3: Make 2 more letters, they shall be called C and D, they starts at zero.
+4: Check to see if C + B is bigger than A, if so skip to step 7
+5: Add B to C, each time you add B to C, add 1 to D
+6: Repeat steps 4 to 5
+7: At this point, A/B using integer division has the answer of D
+
+--Problem 3: Bunny Hunting Deciding which Gun to Use--
+1: Wake up, say your prayers that it isnt a procelain or plastic bunny for today
+2: Converse with mother to see what kind of bunny she wants us to shoot
+3: Gather information about weather (temperature and if it is raining or not)
+4: If your mom wants you to get a plastic bunny then
+    If temperature is < 0
+     If it is raining then
+      Use a shotgun
+     If it isnt raining then
+      Use a shotgun
+   If any of the above conditions are not met you return to your mother and tell her you are unable to secure the night's dinner
+5: If yourmom wants you to get a chocolate bunny then
+    If temperature is < 20
+	 If it is raining then
+	  Use a shotgun
+	 If it isnt raining then
+	  Use a shotgun or a rifle, user choice
+	 If any of the above conditions are not met you return to your mother and tell her you are unable to secure the night's dinner
+6: If your mom wants you to get a porcelain bunny then
+    If temperature > 0
+	 If it is raining then
+	  You cannot hunt this bunny using a rifle, so you return to your mother and tell her you are unable to secure the night's dinner
+	 If it is not raining then
+	  Use a shotgun
+	 If the above conditions are not met you return to your mother and tell her you are unable to secure the night's dinner
+7: Hope you have dinner :D
+
+--Problem 4: The Bunny Number Game--
+1: There are 3 letters that corrospond to each position in the thre digit number, position 1 is A, 2 is B, and 3 is C
+2: We first figure out the 1s position number by first guessing 0
+3: The bunny returns either 1 or 0
+    If the bunny returns 1 skip to step 4, if not contine guessing numbers for the 1 position, incrementing your guess by 1 each time
+4: Next we figure out the 10s position number by again, guessing 0 first
+5: The bunny returns either 1 or 0
+    If the bunny returns 1 skip to step 4, if not contine guessing numbers for the 1 position, incrementing your guess by 1 each time
+6: Next we figure out the 100s position number by again, guessing 0 first
+    If the bunny returns 1 skip to step 7, if not contine guessing numbers for the 1 position, incrementing your guess by 1 each time
+7: At this point, the bunny has returned the number 1 in each position at least once, which we can then concantenate our correct guesses to get the correct number
+8: The bunny shrieks in horror, we shoot it, drag it back home, give it to mom and hope she cooks it right
